@@ -1,0 +1,101 @@
+/* ---------------------------------------------------------------- */
+/* ESTILOS DEL FOOTER PRINCIPAL */
+.main-footer {
+    background-color: #0d0d0d;
+    padding: 40px 0 0;
+    color: #ccc;
+    font-family: 'Rajdhani', sans-serif;
+    border-top: 3px solid #ff00ff; /* Línea neón superior para un toque gamer */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5% 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Asegura que las columnas se envuelvan en móvil */
+}
+
+.footer-col {
+    width: 30%; /* Ancho de columna en escritorio */
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-col h4 {
+    font-size: 1.4em;
+    color: #00ff99; /* Verde Neón */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+/* --- LOGO Y MARCA --- */
+.footer-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2em;
+    color: #00ccff; /* Azul Neón */
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    border-bottom: none;
+}
+
+.university-name {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 5px;
+}
+
+/* --- LISTAS DE ENLACES --- */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col ul a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1em;
+}
+
+.footer-col ul a:hover {
+    color: #ff00ff; /* Magenta Neón en hover */
+    padding-left: 5px; /* Pequeño efecto de deslizamiento */
+}
+
+/* --- BARRA INFERIOR DE DERECHOS --- */
+.footer-bottom {
+    background-color: #1a1a1a; /* Barra más oscura */
+    text-align: center;
+    padding: 15px 5%;
+    font-size: 0.9em;
+    color: #777;
+    border-top: 1px solid #333;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Media Query para móvil */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .footer-col {
+        width: 100%;
+        min-width: auto;
+        margin-bottom: 30px;
+    }
+    .footer-col h4 {
+        text-align: left;
+    }
+}
