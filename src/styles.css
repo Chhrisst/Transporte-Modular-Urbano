@@ -1,62 +1,117 @@
-/* --- src/styles.css --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* 1. Reset Global y Solución de Altura */
-html {
-    height: 100%;
-    /* EVITA EL SCROLL HORIZONTAL */
-    overflow-x: hidden;
+html,
+body {
+  min-height: 100%;
+  background: #01070d;
+  color: #e8f4ff;
 }
 
 body {
-    height: 100%;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #0a0a0a;
-    /* EVITA EL SCROLL HORIZONTAL */
-    overflow-x: hidden;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }
 
-* {
-    /* CLAVE: Asegura que padding y border se incluyan dentro del ancho y alto del elemento */
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+main,
+.main-router-content {
+  flex: 1;
+  display: block;
 }
 
-/* 2. Solución de Estiramiento Angular */
-/* El componente raíz de Angular es el que debe ser el contenedor flexible */
-app-root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;   /* Ocupa el 100% de la altura de la ventana */
-}
-
-/* 3. Estiramiento del Contenido (Basado en la etiqueta <main>) */
-/* Ya sea que uses la clase (main.main-router-content) o solo la etiqueta (main) */
-main, .main-router-content {
-    flex-grow: 1; /* ¡Esto hace que el contenido se estire y empuje el footer! */
-}
-
-/* 4. Corrección de Imágenes (Se mantiene) */
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  display: block;
 }
 
-/* ---------------------------------------------------------------- */
-/* RESTRICCIÓN DE SELECCIÓN DE TEXTO (user-select) */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
 
-/* Aplica 'user-select: none' a elementos clave de la marca y la interfaz: */
-.main-header,
-.logo,
-.main-nav a,
-.btn-action,
-.main-footer,
-.footer-logo {
-    user-select: none; /* Impide la selección de texto en header y footer */
-    -webkit-user-select: none; /* Para navegadores basados en Webkit (Chrome, Safari) */
-    -moz-user-select: none; /* Para Firefox */
-    -ms-user-select: none; /* Para Internet Explorer/Edge */
+.status-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.chip,
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(110, 245, 223, 0.12);
+  border: 1px solid rgba(110, 245, 223, 0.35);
+  color: #6ef5df;
+}
+
+.chip.pendiente,
+.status-chip.pendiente {
+  background: rgba(255, 185, 88, 0.15);
+  border-color: rgba(255, 185, 88, 0.45);
+  color: #ffb958;
+}
+
+.chip.cancelado,
+.status-chip.cancelado {
+  background: rgba(255, 109, 109, 0.15);
+  border-color: rgba(255, 109, 109, 0.45);
+  color: #ff6d6d;
+}
+
+.status {
+  text-align: center;
+}
+
+.tickets tbody tr:hover {
+  background: rgba(110, 245, 223, 0.05);
+}
+
+.ticket-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.fleet__actions button,
+.ticket-actions button {
+  flex: 1 1 150px;
+  border-radius: 12px;
+  border: 1px solid rgba(110, 245, 223, 0.3);
+  background: rgba(110, 245, 223, 0.08);
+  color: #e8f4ff;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+.fleet__actions button:hover,
+.ticket-actions button:hover:not(:disabled) {
+  background: rgba(110, 245, 223, 0.2);
+}
+
+.ticket-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ticket-actions .danger {
+  border-color: rgba(255, 109, 109, 0.45);
+  background: rgba(255, 109, 109, 0.12);
+  color: #ff9c9c;
+}
+
+.ticket-actions .danger:hover:not(:disabled) {
+  background: rgba(255, 109, 109, 0.2);
 }

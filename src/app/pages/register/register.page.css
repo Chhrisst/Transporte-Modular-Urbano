@@ -1,0 +1,113 @@
+:host {
+  display: block;
+  background: linear-gradient(160deg, #0f1e2c, #092a3a 45%, #14a098);
+  min-height: 100vh;
+  padding: 6rem 1.5rem;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+}
+
+.register__card {
+  width: min(540px, 100%);
+  background: rgba(255, 255, 255, 0.98);
+  padding: 3rem;
+  border-radius: 28px;
+  box-shadow: 0 20px 60px rgba(2, 38, 61, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.register__card h1 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: #0f1e2c;
+}
+
+.register__card p {
+  color: #395064;
+  line-height: 1.5;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.form-row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+  color: #15364a;
+}
+
+.form-group input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #c8d7e1;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #14a098;
+  box-shadow: 0 0 0 4px rgba(20, 160, 152, 0.12);
+}
+
+.btn-primary {
+  align-self: flex-start;
+  background: linear-gradient(135deg, #14a098, #00c2a8);
+  color: #f5fbff;
+  padding: 0.9rem 2.4rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 15px 30px rgba(20, 160, 152, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.register__hint {
+  margin-top: 1.5rem;
+  color: #395064;
+}
+
+.register__hint a {
+  color: #14a098;
+  font-weight: 600;
+}
+
+.register__feedback {
+  margin-top: 1rem;
+  color: #0f1e2c;
+  background: rgba(20, 160, 152, 0.12);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  :host {
+    padding: 4rem 1rem;
+  }
+
+  .register__card {
+    padding: 2.5rem 1.75rem;
+  }
+}
