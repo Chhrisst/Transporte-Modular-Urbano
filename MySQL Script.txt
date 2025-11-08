@@ -1,0 +1,231 @@
+-- -----------------------------------------------------
+
+-- Creación de la Base de Datos
+
+-- -----------------------------------------------------
+
+CREATE DATABASE IF NOT EXISTS `vem_system_db`;
+
+USE `vem_system_db`;
+
+
+
+-- -----------------------------------------------------
+
+-- 1. Tabla Roles
+
+-- Define los roles de acceso (ADMIN, CONDUCTOR, OPERADOR)
+
+-- -----------------------------------------------------
+
+CREATE TABLE `roles` (
+
+  `rol_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `nombre_rol` VARCHAR(50) NOT NULL UNIQUE
+
+);
+
+
+
+-- -----------------------------------------------------
+
+-- 2. Tabla Usuarios
+
+-- Almacena la información de todos los usuarios del sistema
+
+-- -----------------------------------------------------
+
+CREATE TABLE `usuarios` (
+
+  `usuario_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `rol_id` INT NOT NULL,
+
+  `nombre` VARCHAR(100) NOT NULL,
+
+  `apellido` VARCHAR(100) NOT NULL,
+
+  `email` VARCHAR(150) NOT NULL UNIQUE,
+
+  `password_hash` VARCHAR(255) NOT NULL, -- Almacena la contraseña hasheada
+
+  `fecha_registro` DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (`rol_id`) REFERENCES `roles`(`rol_id`)
+
+);
+
+
+
+-- -----------------------------------------------------
+
+-- 3. Tabla Vehiculos (VEMs)
+
+-- El núcleo de la flota
+
+-- -----------------------------------------------------
+
+CREATE TABLE `vehiculos` (
+
+  `vehiculo_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `placa` VARCHAR(10) NOT NULL UNIQUE,
+
+  `modelo` VARCHAR(50),
+
+  `capacidad` INT NOT NULL DEFAULT 15,
+
+  `autonomia_maxima_km` DECIMAL(6, 2) NOT NULL DEFAULT 200.00,
+
+  `autonomia_actual_km` DECIMAL(6, 2),
+
+  `estado` ENUM('OPERATIVO', 'EN_CARGA', 'MANTENIMIENTO', 'INACTIVO') NOT NULL DEFAULT 'OPERATIVO',
+
+  `ciudad_operacion` VARCHAR(50) NOT NULL
+
+);
+
+
+
+-- -----------------------------------------------------
+
+-- 4. Tabla Rutas
+
+-- Define las rutas urbanas operativas
+
+-- -----------------------------------------------------
+
+CREATE TABLE `rutas` (
+
+  `ruta_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `nombre_ruta` VARCHAR(100) NOT NULL,
+
+  `ciudad` VARCHAR(50) NOT NULL,
+
+  `distancia_estimada_km` DECIMAL(6, 2) NOT NULL
+
+);
+
+
+
+-- -----------------------------------------------------
+
+-- 5. Tabla Estaciones_Carga
+
+-- La infraestructura de energía solar fotovoltaica
+
+-- -----------------------------------------------------
+
+CREATE TABLE `estaciones_carga` (
+
+  `estacion_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `nombre_estacion` VARCHAR(100) NOT NULL,
+
+  `ubicacion_latitud` DECIMAL(10, 8) NOT NULL,
+
+  `ubicacion_longitud` DECIMAL(11, 8) NOT NULL,
+
+  `tipo_fuente` ENUM('SOLAR', 'MIXTA', 'RED') NOT NULL DEFAULT 'SOLAR',
+
+  `estado` ENUM('ACTIVA', 'MANTENIMIENTO', 'INACTIVA') NOT NULL DEFAULT 'ACTIVA'
+
+);
+
+
+
+-- -----------------------------------------------------
+
+-- 6. Tabla Horarios_Viajes
+
+-- Asigna vehículos y conductores a rutas (Relación N:M entre Vehiculos, Rutas, Usuarios)
+
+-- -----------------------------------------------------
+
+CREATE TABLE `horarios_viajes` (
+
+  `viaje_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `ruta_id` INT NOT NULL,
+
+  `vehiculo_id` INT NOT NULL,
+
+  `conductor_id` INT NOT NULL, -- Debe ser un usuario con rol 'CONDUCTOR'
+
+  `fecha_hora_inicio` DATETIME NOT NULL,
+
+  `fecha_hora_fin_estimada` DATETIME,
+
+  `fecha_hora_fin_real` DATETIME,
+
+  `estado_viaje` ENUM('PROGRAMADO', 'EN_CURSO', 'FINALIZADO', 'CANCELADO') NOT NULL DEFAULT 'PROGRAMADO',
+
+  FOREIGN KEY (`ruta_id`) REFERENCES `rutas`(`ruta_id`),
+
+  FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculos`(`vehiculo_id`),
+
+  FOREIGN KEY (`conductor_id`) REFERENCES `usuarios`(`usuario_id`)
+
+);
+
+
+
+-- -----------------------------------------------------
+
+-- 7. Tabla Mantenimientos
+
+-- Historial y registro de servicios para la flota
+
+-- -----------------------------------------------------
+
+CREATE TABLE `mantenimientos` (
+
+  `mantenimiento_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `vehiculo_id` INT NOT NULL,
+
+  `fecha_solicitud` DATE NOT NULL,
+
+  `fecha_inicio_servicio` DATE,
+
+  `fecha_fin_servicio` DATE,
+
+  `descripcion_servicio` TEXT,
+
+  `costo` DECIMAL(8, 2) DEFAULT 0.00,
+
+  FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculos`(`vehiculo_id`)
+
+);
+
+
+
+-- -----------------------------------------------------
+
+-- 8. Tabla Historial_Cargas
+
+-- Registra el uso de la infraestructura de carga
+
+-- -----------------------------------------------------
+
+CREATE TABLE `historial_cargas` (
+
+  `carga_id` INT PRIMARY KEY AUTO_INCREMENT,
+
+  `vehiculo_id` INT NOT NULL,
+
+  `estacion_id` INT NOT NULL,
+
+  `fecha_inicio_carga` DATETIME NOT NULL,
+
+  `fecha_fin_carga` DATETIME,
+
+  `kwh_cargados` DECIMAL(6, 2) NOT NULL,
+
+  FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculos`(`vehiculo_id`),
+
+  FOREIGN KEY (`estacion_id`) REFERENCES `estaciones_carga`(`estacion_id`)
+
+);
