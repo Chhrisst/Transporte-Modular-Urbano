@@ -1,31 +1,14 @@
-<footer class="main-footer">
-    <div class="footer-content">
-
-        <div class="footer-col footer-branding">
-            <h4 class="footer-logo">POWER UP</h4>
-            <p>&copy; 2025 Derechos Reservados | UPN</p>
-            <p class="university-name">Universidad Privada del Norte</p>
-        </div>
-
-        <div class="footer-col footer-links">
-            <h4>Enlaces Rápidos</h4>
-            <ul>
-                <li><a routerLink="/nosotros">Nuestra Misión</a></li>
-                <li><a routerLink="/productos">Catálogo</a></li>
-                <li><a routerLink="/contacto">Soporte y Contacto</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col footer-social">
-            <h4>Síguenos</h4>
-            <ul>
-                <li><a href="#" target="_blank">Discord 👾</a></li>
-                <li><a href="#" target="_blank">Twitch 🎮</a></li>
-                <li><a href="#" target="_blank">Instagram 📸</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>Potenciando tu juego al máximo.</p>
-    </div>
+<footer class="footer">
+  <div class="footer__brand">
+    <h2>ModuTransit</h2>
+    <p>Movilidad modular eléctrica para ciudades conectadas y sostenibles.</p>
+  </div>
+  <div class="footer__links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+    <a routerLink="/boletos" routerLinkActive="active">Boletos</a>
+    <a routerLink="/panel" routerLinkActive="active">Panel administrativo</a>
+  </div>
+  <div class="footer__meta">
+    <p>© {{ currentYear }} ModuTransit · Proyecto académico de transporte modular urbano.</p>
+  </div>
 </footer>

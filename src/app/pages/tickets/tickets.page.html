@@ -1,0 +1,93 @@
+<section class="tickets">
+  <div class="tickets__form">
+    <h1>Compra inteligente de boletos</h1>
+    <p>
+      Selecciona tu ruta modular, el horario deseado y asegura tu viaje con unidades eléctricas de
+      alta autonomía.
+    </p>
+
+    <form (ngSubmit)="purchase()" novalidate>
+      <div class="form-group">
+        <label for="route">Ruta</label>
+        <select id="route" name="route" [(ngModel)]="selectedRouteId" required>
+          <option [ngValue]="null" disabled>Elige una ruta</option>
+          <option *ngFor="let route of routes()" [ngValue]="route.id">
+            {{ route.name }} · {{ route.origin }} → {{ route.destination }}
+          </option>
+        </select>
+      </div>
+
+      <div class="grid">
+        <div class="form-group">
+          <label for="travelDate">Fecha</label>
+          <input id="travelDate" type="date" name="travelDate" [(ngModel)]="travelDate" required />
+        </div>
+        <div class="form-group">
+          <label for="departure">Horario</label>
+          <select id="departure" name="departure" [(ngModel)]="departure" required>
+            <option value="" disabled>Selecciona horario</option>
+            <option *ngFor="let hour of availableDepartures()" [value]="hour">{{ hour }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="form-group">
+          <label for="seats">Asientos</label>
+          <input id="seats" type="number" name="seats" min="1" [(ngModel)]="seats" />
+        </div>
+        <div class="form-group">
+          <label for="modules">Módulos reservados</label>
+          <input id="modules" type="number" name="modules" min="1" [(ngModel)]="modulesRequested" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="passengerName">Nombre del pasajero</label>
+        <input id="passengerName" name="passengerName" [(ngModel)]="passengerName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="passengerEmail">Correo de contacto</label>
+        <input id="passengerEmail" type="email" name="passengerEmail" [(ngModel)]="passengerEmail" required />
+      </div>
+
+      <button type="submit" class="btn-primary">Confirmar compra</button>
+    </form>
+
+    <p class="tickets__feedback" *ngIf="feedback() as message">{{ message }}</p>
+  </div>
+
+  <aside class="tickets__summary" *ngIf="selectedRoute() as route">
+    <h2>{{ route.name }}</h2>
+    <p class="summary__location">{{ route.origin }} → {{ route.destination }}</p>
+    <p class="summary__duration">Duración estimada: {{ route.estimatedDuration }}</p>
+
+    <section>
+      <h3>Paraderos</h3>
+      <ul>
+        <li *ngFor="let stop of route.stops">{{ stop }}</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Ocupación actual</h3>
+      <p>{{ route.occupancy }}% de ocupación promedio</p>
+    </section>
+  </aside>
+</section>
+
+<section class="tickets__history">
+  <h2>Reservas recientes</h2>
+  <div class="tickets__cards">
+    <article *ngFor="let ticket of tickets()" class="ticket-card">
+      <header>
+        <h3>{{ ticket.passengerName }}</h3>
+        <span [class.confirmed]="ticket.paymentStatus === 'confirmado'">{{ ticket.paymentStatus }}</span>
+      </header>
+      <p>{{ ticket.passengerEmail }}</p>
+      <p>Ruta: {{ ticket.routeId }} · Salida {{ ticket.departure }} · {{ ticket.travelDate }}</p>
+      <p>{{ ticket.seats }} asiento(s) · {{ ticket.modulesRequested }} módulo(s)</p>
+    </article>
+  </div>
+</section>

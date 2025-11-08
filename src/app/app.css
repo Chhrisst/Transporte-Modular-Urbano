@@ -1,5 +1,12 @@
-h1{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: aquamarine ;
-  color: blue;
+:host {
+  font-family: 'Poppins', sans-serif;
+  color: #0a1a2b;
+  background: #01070d;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-router-content {
+  flex: 1 0 auto;
 }

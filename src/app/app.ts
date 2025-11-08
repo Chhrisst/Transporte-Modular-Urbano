@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer } from './components/footer/footer';
 import { Header } from './components/header/header';
@@ -10,6 +10,5 @@ import { Header } from './components/header/header';
   styleUrl: './app.css'
 })
 export class App {
-  // atributos de la clase
-  protected readonly title = 'Universidad UPN'
+  protected readonly title = 'ModuTransit · Transporte Modular Urbano';
 }
