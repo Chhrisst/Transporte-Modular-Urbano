@@ -17,23 +17,19 @@ Se recomienda instalar las extensiones “Angular Language Service” y “ESLin
 🚀 Cómo ejecutar el proyecto en VS Code
 Clona el repositorio
 
-bash
 Copiar código
 git clone https://github.com/Chhrisst/Transporte-Modular-Urbano.git
 Abre la carpeta del proyecto en VS Code
 
-bash
 Copiar código
 cd Transporte-Modular-Urbano
 code .
 Instala las dependencias
 
-bash
 Copiar código
 npm install
 Inicia el servidor de desarrollo
 
-bash
 Copiar código
 ng serve
 Abre la aplicación en el navegador
@@ -45,16 +41,14 @@ Cualquier cambio en el código fuente recargará la aplicación automáticamente
 🧱 Comandos útiles
 Crear un nuevo componente
 
-bash
 Copiar código
 ng generate component nombre-del-componente
 Compilar el proyecto para producción
 
-bash
 Copiar código
 ng build
 Ejecutar pruebas unitarias
 
-bash
 Copiar código
 ng test
+
