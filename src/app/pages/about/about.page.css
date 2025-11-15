@@ -1,0 +1,138 @@
+:host {
+  display: block;
+  color: #d7f8ff;
+}
+
+.about-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+  padding: 4rem 1.5rem;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.about-hero__content h1 {
+  font-size: 2.75rem;
+  margin-bottom: 1rem;
+  color: #9ff8ff;
+}
+
+.about-hero__content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(215, 248, 255, 0.78);
+}
+
+.about-hero__stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.about-hero__stats div {
+  background: rgba(7, 40, 58, 0.7);
+  border: 1px solid rgba(79, 244, 219, 0.25);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  text-align: center;
+  min-width: 140px;
+}
+
+.value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6ef5df;
+  display: block;
+}
+
+.label {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(215, 248, 255, 0.7);
+}
+
+.about-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  padding: 3rem 1.5rem;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.about-grid article {
+  background: linear-gradient(160deg, rgba(7, 43, 64, 0.85), rgba(5, 24, 38, 0.85));
+  border: 1px solid rgba(79, 244, 219, 0.15);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 25px 60px rgba(4, 20, 33, 0.45);
+}
+
+.about-grid h2 {
+  color: #9ff8ff;
+  font-size: 1.45rem;
+  margin-bottom: 1rem;
+}
+
+.about-grid p {
+  color: rgba(215, 248, 255, 0.72);
+  line-height: 1.6;
+}
+
+.about-timeline {
+  padding: 4rem 1.5rem 5rem;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.about-timeline h2 {
+  color: #9ff8ff;
+  font-size: 1.9rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.about-timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about-timeline li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  background: rgba(3, 25, 40, 0.8);
+  border: 1px solid rgba(79, 244, 219, 0.15);
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+
+.about-timeline .year {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #6ef5df;
+}
+
+.about-timeline p {
+  margin: 0;
+  color: rgba(215, 248, 255, 0.74);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .about-hero__stats {
+    flex-direction: column;
+  }
+
+  .about-timeline li {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}

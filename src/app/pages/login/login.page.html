@@ -1,0 +1,44 @@
+<section class="login">
+  <div class="login__card">
+    <h1>Ingreso de pasajeros</h1>
+    <p>Consulta tus viajes activos, completa pagos o ajusta tu perfil de movilidad.</p>
+
+    <form (ngSubmit)="login()" novalidate>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input id="email" type="email" name="email" [(ngModel)]="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" name="password" [(ngModel)]="password" required />
+      </div>
+
+      <button class="btn-primary" type="submit">Iniciar sesión</button>
+    </form>
+
+    <div class="login__state" *ngIf="session() as current">
+      <p>Sesión activa: {{ current.user.fullName }} · {{ current.mode | uppercase }}</p>
+      <button class="btn-outline" type="button" (click)="logout()">Cerrar sesión</button>
+    </div>
+
+    <p class="login__hint">
+      ¿No tienes cuenta?
+      <a routerLink="/registro">Regístrate</a>
+    </p>
+
+    <p class="login__feedback" *ngIf="feedback() as message">{{ message }}</p>
+  </div>
+
+  <aside class="login__demo">
+    <h2>Accesos de prueba UrbanRide</h2>
+    <div class="login__demo-card" *ngFor="let account of demoAccounts">
+      <span class="login__demo-label">{{ account.label }}</span>
+      <span class="login__demo-credential">{{ account.email }}</span>
+      <span class="login__demo-credential">{{ account.password }}</span>
+    </div>
+    <p class="login__demo-note">
+      Inicia sesión con cualquiera de estas cuentas para explorar compra de boletos y rutas activas.
+    </p>
+  </aside>
+</section>

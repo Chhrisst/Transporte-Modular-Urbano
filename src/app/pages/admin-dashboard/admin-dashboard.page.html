@@ -1,0 +1,275 @@
+<section class="dashboard">
+  <header class="dashboard__header">
+    <div>
+      <p class="dashboard__kicker">Panel maestro</p>
+      <h1>Operación en vivo del transporte modular urbano</h1>
+      <p class="dashboard__subtitle">
+        Visualiza métricas clave, gestiona usuarios, controla la flota eléctrica y actualiza rutas en
+        cuestión de segundos.
+      </p>
+    </div>
+    <div class="dashboard__metrics">
+      <article *ngFor="let metric of metrics()">
+        <h2>{{ metric.value }}</h2>
+        <p>{{ metric.label }}</p>
+      </article>
+    </div>
+  </header>
+
+  <section class="dashboard__grid">
+    <article class="card">
+      <header>
+        <div>
+          <h2>Gestión de usuarios</h2>
+          <p>Activa, suspende o promueve operadores de campo.</p>
+        </div>
+      </header>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users()" [ngClass]="user.status">
+            <td>
+              <strong>{{ user.fullName }}</strong>
+              <span>{{ user.email }}</span>
+            </td>
+            <td>{{ user.role }}</td>
+            <td class="status">{{ user.status }}</td>
+            <td class="actions">
+              <button type="button" (click)="updateUserStatus(user.id, 'activo')">Activar</button>
+              <button type="button" (click)="updateUserStatus(user.id, 'suspendido')">Suspender</button>
+              <button type="button" (click)="promoteUser(user.id)">Promover a operador</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+
+    <article class="card">
+      <header>
+        <div>
+          <h2>Flota modular eléctrica</h2>
+          <p>Monitoreo de autonomía, módulos acoplados y estado operativo.</p>
+        </div>
+      </header>
+
+      <div class="fleet">
+        <div *ngFor="let vehicle of fleet()" class="fleet__item">
+          <div class="fleet__header">
+            <h3>{{ vehicle.code }}</h3>
+            <span>{{ vehicle.type }}</span>
+          </div>
+          <p>{{ vehicle.capacity }} pasajeros · {{ vehicle.modules }} módulos · {{ vehicle.autonomyKm }} km</p>
+          <p>Ruta asignada: {{ vehicle.assignedRouteId || '—' }}</p>
+          <div class="fleet__actions">
+            <button type="button" (click)="updateVehicleStatus(vehicle.id, 'operativo')">Operativo</button>
+            <button type="button" (click)="updateVehicleStatus(vehicle.id, 'mantenimiento')">Mantenimiento</button>
+            <button type="button" (click)="updateVehicleStatus(vehicle.id, 'reserva')">Reserva</button>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-inline" (ngSubmit)="registerVehicle()" novalidate>
+        <h3>Agregar nueva unidad</h3>
+        <div class="form-grid">
+          <label>
+            Código
+            <input [(ngModel)]="newVehicle.code" name="code" required />
+          </label>
+          <label>
+            Tipo
+            <select [(ngModel)]="newVehicle.type" name="type">
+              <option value="modulo ligero">Módulo ligero</option>
+              <option value="modulo articulado">Módulo articulado</option>
+              <option value="shuttle urbano">Shuttle urbano</option>
+            </select>
+          </label>
+          <label>
+            Capacidad
+            <input type="number" [(ngModel)]="newVehicle.capacity" name="capacity" min="10" />
+          </label>
+          <label>
+            Módulos
+            <input type="number" [(ngModel)]="newVehicle.modules" name="modules" min="1" />
+          </label>
+          <label>
+            Autonomía (km)
+            <input type="number" [(ngModel)]="newVehicle.autonomyKm" name="autonomyKm" min="80" />
+          </label>
+          <label>
+            Estado
+            <select [(ngModel)]="newVehicle.status" name="status">
+              <option value="operativo">Operativo</option>
+              <option value="mantenimiento">Mantenimiento</option>
+              <option value="reserva">Reserva</option>
+            </select>
+          </label>
+        </div>
+        <button type="submit">Registrar unidad</button>
+      </form>
+    </article>
+
+    <article class="card">
+      <header>
+        <div>
+          <h2>Rutas y horarios</h2>
+          <p>Define corredores, paraderos y frecuencias por módulo.</p>
+        </div>
+      </header>
+
+      <div class="routes">
+        <div *ngFor="let route of routes()" class="routes__item">
+          <header>
+            <h3>{{ route.name }}</h3>
+            <span>{{ route.moduleType }}</span>
+          </header>
+          <p>{{ route.origin }} → {{ route.destination }} ({{ route.estimatedDuration }})</p>
+          <p>Salidas: {{ route.departures.join(', ') }}</p>
+          <p>Paraderos: {{ route.stops.join(', ') }}</p>
+          <p>Ocupación promedio: {{ route.occupancy }}%</p>
+        </div>
+      </div>
+
+      <form class="form-inline" (ngSubmit)="registerRoute()" novalidate>
+        <h3>Crear nueva ruta</h3>
+        <div class="form-grid">
+          <label>
+            Nombre
+            <input [(ngModel)]="newRoute.name" name="routeName" required />
+          </label>
+          <label>
+            Origen
+            <input [(ngModel)]="newRoute.origin" name="routeOrigin" required />
+          </label>
+          <label>
+            Destino
+            <input [(ngModel)]="newRoute.destination" name="routeDestination" required />
+          </label>
+          <label>
+            Duración estimada
+            <input [(ngModel)]="newRoute.estimatedDuration" name="routeDuration" />
+          </label>
+          <label>
+            Tipo de módulo
+            <select [(ngModel)]="newRoute.moduleType" name="routeType">
+              <option value="modulo ligero">Módulo ligero</option>
+              <option value="modulo articulado">Módulo articulado</option>
+              <option value="shuttle urbano">Shuttle urbano</option>
+            </select>
+          </label>
+          <label>
+            Horarios (coma)
+            <input [(ngModel)]="departuresInput" name="departures" placeholder="06:00, 07:30" />
+          </label>
+          <label>
+            Paraderos (coma)
+            <input [(ngModel)]="stopsInput" name="stops" placeholder="Estación Central, Campus" />
+          </label>
+        </div>
+        <button type="submit">Crear ruta</button>
+      </form>
+    </article>
+
+    <article class="card">
+      <header>
+        <div>
+          <h2>Gestión de boletos</h2>
+          <p>Monitorea pagos digitales y calibra módulos según la demanda del día.</p>
+        </div>
+        <div class="status-summary">
+          <span class="chip confirmado">Confirmados: {{ statusSummary().confirmado }}</span>
+          <span class="chip pendiente">Pendientes: {{ statusSummary().pendiente }}</span>
+          <span class="chip cancelado">Cancelados: {{ statusSummary().cancelado }}</span>
+        </div>
+      </header>
+
+      <div class="ticket-tools">
+        <label>
+          Buscar
+          <input
+            type="search"
+            placeholder="Pasajero, correo o ruta"
+            [(ngModel)]="ticketSearchModel"
+            name="ticketSearch"
+          />
+        </label>
+        <label>
+          Estado
+          <select [(ngModel)]="ticketStatusFilterModel" name="ticketStatus">
+            <option value="todos">Todos</option>
+            <option value="pendiente">Pendientes</option>
+            <option value="confirmado">Confirmados</option>
+            <option value="cancelado">Cancelados</option>
+          </select>
+        </label>
+      </div>
+
+      <ng-container *ngIf="filteredTickets() as tickets">
+        <table class="tickets">
+          <thead>
+            <tr>
+              <th>Pasajero</th>
+              <th>Ruta y servicio</th>
+              <th>Viaje</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of tickets" [ngClass]="ticket.paymentStatus">
+              <td>
+                <strong>{{ ticket.passengerName }}</strong>
+                <span>{{ ticket.passengerEmail }}</span>
+              </td>
+              <td>
+                <strong>{{ resolveRouteName(ticket.routeId) }}</strong>
+                <span>{{ resolveRouteDetails(ticket.routeId) }}</span>
+              </td>
+              <td>
+                <span>{{ ticket.travelDate }} · {{ ticket.departure }}</span>
+                <span>{{ ticket.seats }} asiento(s) · {{ ticket.modulesRequested }} módulo(s)</span>
+              </td>
+              <td class="status">
+                <span class="status-chip" [ngClass]="ticket.paymentStatus">{{ ticket.paymentStatus | titlecase }}</span>
+              </td>
+              <td class="ticket-actions">
+                <button
+                  type="button"
+                  (click)="updateTicketStatus(ticket.id, 'confirmado')"
+                  [disabled]="ticket.paymentStatus === 'confirmado'"
+                >
+                  Confirmar
+                </button>
+                <button
+                  type="button"
+                  (click)="updateTicketStatus(ticket.id, 'pendiente')"
+                  [disabled]="ticket.paymentStatus === 'pendiente'"
+                >
+                  Marcar pendiente
+                </button>
+                <button
+                  type="button"
+                  class="danger"
+                  (click)="updateTicketStatus(ticket.id, 'cancelado')"
+                  [disabled]="ticket.paymentStatus === 'cancelado'"
+                >
+                  Cancelar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="empty-state" *ngIf="tickets.length === 0">No encontramos boletos con los filtros seleccionados.</p>
+      </ng-container>
+    </article>
+  </section>
+
+  <p class="dashboard__feedback" *ngIf="creationFeedback() as message">{{ message }}</p>
+</section>

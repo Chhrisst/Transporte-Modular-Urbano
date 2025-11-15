@@ -1,0 +1,48 @@
+<section class="register">
+  <div class="register__card">
+    <h1>Crea tu cuenta modular</h1>
+    <p>Accede al ecosistema de movilidad urbana eléctrica y administra tus viajes desde cualquier dispositivo.</p>
+
+    <form (ngSubmit)="register()" #registerForm="ngForm" novalidate>
+      <div class="form-group">
+        <label for="fullName">Nombre completo</label>
+        <input id="fullName" name="fullName" [(ngModel)]="fullName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input id="email" type="email" name="email" [(ngModel)]="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Teléfono de contacto</label>
+        <input id="phone" name="phone" [(ngModel)]="phone" placeholder="+51" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input id="password" type="password" name="password" [(ngModel)]="password" required />
+        </div>
+        <div class="form-group">
+          <label for="confirmation">Confirmar contraseña</label>
+          <input id="confirmation" type="password" name="confirmation" [(ngModel)]="confirmation" required />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary">Registrarme</button>
+    </form>
+
+    <p class="register__hint">
+      ¿Ya tienes cuenta?
+      <a routerLink="/ingreso">Inicia sesión</a>
+    </p>
+
+    <p class="register__note">
+      UrbanRide está listo para conectarse con nuestra próxima API REST en Spring Boot, por lo que tu
+      perfil se sincronizará automáticamente cuando el backend esté disponible.
+    </p>
+
+    <p class="register__feedback" *ngIf="successMessage() as message">{{ message }}</p>
+  </div>
+</section>

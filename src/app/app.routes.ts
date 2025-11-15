@@ -1,18 +1,22 @@
 import { Routes } from '@angular/router';
-import { About } from './pages/about/about';
-import { Nosotros } from './pages/nosotros/nosotros';
-import { Products } from './pages/products/products';
-import { Contacto } from './pages/contacto/contacto';
-import { Login } from './pages/login/login.component';
-import { Carrito } from './pages/carrito/carrito.component';
+import { HomePage } from './pages/home/home.page';
+import { RegisterPage } from './pages/register/register.page';
+import { LoginPage } from './pages/login/login.page';
+import { TicketsPage } from './pages/tickets/tickets.page';
+import { AdminLoginPage } from './pages/admin-login/admin-login.page';
+import { AdminDashboardPage } from './pages/admin-dashboard/admin-dashboard.page';
+import { AboutPage } from './pages/about/about.page';
+import { ContactPage } from './pages/contact/contact.page';
 
 export const routes: Routes = [
-  { path:'', component: About },
-  { path:'inicio', redirectTo:'', pathMatch:'full' },
-  { path:'nosotros', component: Nosotros },
-  { path:'productos', component: Products },
-  { path:'carrito', component: Carrito },
-  { path:'contacto', component: Contacto },
-  { path:'login', component: Login },
-  { path:'**', redirectTo:'' }
+  { path: '', component: HomePage },
+  { path: 'inicio', redirectTo: '', pathMatch: 'full' },
+  { path: 'nosotros', component: AboutPage },
+  { path: 'contacto', component: ContactPage },
+  { path: 'registro', component: RegisterPage },
+  { path: 'ingreso', component: LoginPage },
+  { path: 'boletos', component: TicketsPage },
+  { path: 'admin/acceso', component: AdminLoginPage },
+  { path: 'panel', component: AdminDashboardPage },
+  { path: '**', redirectTo: '' }
 ];

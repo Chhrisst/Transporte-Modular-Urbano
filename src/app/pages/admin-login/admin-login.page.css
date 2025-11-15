@@ -1,0 +1,116 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #051727, #0d3a52 50%, #14a098);
+  padding: 6rem 1.5rem;
+}
+
+.admin-login {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-login__panel {
+  width: min(520px, 100%);
+  background: rgba(4, 22, 35, 0.9);
+  border-radius: 28px;
+  padding: 3.5rem;
+  color: #f5fbff;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+}
+
+.admin-login__panel h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.admin-login__panel p {
+  color: rgba(245, 251, 255, 0.75);
+  line-height: 1.6;
+}
+
+form {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(7, 36, 56, 0.65);
+  color: #f5fbff;
+  padding: 0.85rem 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #6ef5df;
+  box-shadow: 0 0 0 4px rgba(110, 245, 223, 0.25);
+}
+
+.btn-primary {
+  justify-self: flex-start;
+  background: linear-gradient(135deg, #6ef5df, #14a098);
+  color: #04121f;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 2.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 18px 40px rgba(110, 245, 223, 0.25);
+}
+
+.admin-login__feedback {
+  margin-top: 1.5rem;
+  font-weight: 500;
+  color: #6ef5df;
+}
+
+.admin-login__credentials {
+  margin-top: 2rem;
+  background: rgba(6, 30, 47, 0.75);
+  border: 1px solid rgba(110, 245, 223, 0.18);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.admin-login__credentials h2 {
+  margin: 0 0 0.5rem;
+  color: #9ff8ff;
+  font-size: 1.35rem;
+}
+
+.admin-login__credentials span {
+  color: rgba(245, 251, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.admin-login__back {
+  margin-top: 2.5rem;
+}
+
+.admin-login__back a {
+  color: #6ef5df;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  :host {
+    padding: 4rem 1rem;
+  }
+
+  .admin-login__panel {
+    padding: 2.75rem 1.75rem;
+  }
+}
