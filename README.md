@@ -1,4 +1,4 @@
-# 🚍 Transporte Modular Urbano
+# 🚍 UrbanRide · Transporte Modular Urbano
 
 Este proyecto es una aplicación web desarrollada con **Angular**, creada como parte del proyecto de transporte urbano sostenible con vehículos eléctricos modulares (VEM).
 

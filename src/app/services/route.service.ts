@@ -1,8 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, signal } from '@angular/core';
+import { take } from 'rxjs/operators';
+
+import { environment } from '../../environments/environment';
 import { RouteSchedule } from '../models/route.model';
 
 @Injectable({ providedIn: 'root' })
 export class RouteService {
+  private readonly apiUrl = `${environment.apiUrl}/routes`;
+  private readonly useMockData = environment.useMockData;
   private readonly _routes = signal<RouteSchedule[]>([
     {
       id: 1,
@@ -42,20 +48,63 @@ export class RouteService {
   readonly routes = this._routes.asReadonly();
   readonly totalRoutes = computed(() => this._routes().length);
 
+  constructor(private readonly http: HttpClient) {
+    if (!this.useMockData) {
+      this.refreshFromApi();
+    }
+  }
+
   addRoute(route: Omit<RouteSchedule, 'id' | 'occupancy'>): void {
-    this._routes.update((routes) => [
-      ...routes,
-      {
-        ...route,
-        id: this._routes().length + 1,
-        occupancy: 0
-      }
-    ]);
+    const newRoute: RouteSchedule = {
+      ...route,
+      id: this._routes().length + 1,
+      occupancy: 0
+    };
+
+    this._routes.update((routes) => [...routes, newRoute]);
+
+    if (!this.useMockData) {
+      void this.http
+        .post<RouteSchedule>(this.apiUrl, newRoute)
+        .pipe(take(1))
+        .subscribe({
+          next: (created) => this.mergeRoute(created),
+          error: (error) => console.error('No se pudo registrar la ruta', error)
+        });
+    }
   }
 
   updateOccupancy(routeId: number, occupancy: number): void {
     this._routes.update((routes) =>
       routes.map((route) => (route.id === routeId ? { ...route, occupancy } : route))
+    );
+
+    if (!this.useMockData) {
+      void this.http
+        .patch<RouteSchedule>(`${this.apiUrl}/${routeId}`, { occupancy })
+        .pipe(take(1))
+        .subscribe({
+          next: (updated) => this.mergeRoute(updated),
+          error: (error) => console.error('No se pudo actualizar la ocupación de la ruta', error)
+        });
+    }
+  }
+
+  private refreshFromApi(): void {
+    void this.http
+      .get<RouteSchedule[]>(this.apiUrl)
+      .pipe(take(1))
+      .subscribe({
+        next: (routes) => this._routes.set(routes),
+        error: (error) => console.error('No se pudo obtener las rutas desde la API', error)
+      });
+  }
+
+  private mergeRoute(updated: RouteSchedule): void {
+    this._routes.update((routes) =>
+      routes.map((route) =>
+        route.id === updated.id || route.name === updated.name ? { ...route, ...updated } : route
+      )
     );
   }
 }

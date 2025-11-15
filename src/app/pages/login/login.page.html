@@ -29,4 +29,16 @@
 
     <p class="login__feedback" *ngIf="feedback() as message">{{ message }}</p>
   </div>
+
+  <aside class="login__demo">
+    <h2>Accesos de prueba UrbanRide</h2>
+    <div class="login__demo-card" *ngFor="let account of demoAccounts">
+      <span class="login__demo-label">{{ account.label }}</span>
+      <span class="login__demo-credential">{{ account.email }}</span>
+      <span class="login__demo-credential">{{ account.password }}</span>
+    </div>
+    <p class="login__demo-note">
+      Inicia sesión con cualquiera de estas cuentas para explorar compra de boletos y rutas activas.
+    </p>
+  </aside>
 </section>

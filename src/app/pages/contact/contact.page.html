@@ -1,0 +1,42 @@
+<section class="contact-hero">
+  <h1>Conecta con UrbanRide</h1>
+  <p>
+    Nuestro equipo acompaña cada despliegue modular, desde la planificación de rutas hasta la
+    integración con tu sistema académico o municipal.
+  </p>
+</section>
+
+<section class="contact-content">
+  <form (ngSubmit)="enviar()" novalidate>
+    <h2>Escríbenos</h2>
+    <label for="name">Nombre completo</label>
+    <input id="name" type="text" name="name" [(ngModel)]="name" required />
+
+    <label for="email">Correo electrónico</label>
+    <input id="email" type="email" name="email" [(ngModel)]="email" required />
+
+    <label for="message">Mensaje</label>
+    <textarea id="message" name="message" rows="4" [(ngModel)]="message" required></textarea>
+
+    <button type="submit">Enviar</button>
+    <p class="contact-feedback" *ngIf="submitted()">Gracias, pronto coordinaremos contigo.</p>
+  </form>
+
+  <div class="contact-details">
+    <div class="detail-card">
+      <h3>Alianzas académicas</h3>
+      <p>universidades@urbanride.com</p>
+      <span>Integraciones curriculares y proyectos de investigación.</span>
+    </div>
+    <div class="detail-card">
+      <h3>Operaciones y soporte</h3>
+      <p>soporte@urbanride.com</p>
+      <span>Monitoreo de rutas, incidencias y capacitación.</span>
+    </div>
+    <div class="detail-card">
+      <h3>Prensa y divulgación</h3>
+      <p>prensa@urbanride.com</p>
+      <span>Historias de movilidad sostenible y lanzamientos públicos.</span>
+    </div>
+  </div>
+</section>

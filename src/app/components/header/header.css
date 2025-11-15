@@ -58,10 +58,15 @@ nav a:hover {
   border: none;
   border-radius: 999px;
   padding: 0.55rem 1.25rem;
-  background: rgba(110, 245, 223, 0.15);
+  background: rgba(110, 245, 223, 0.18);
   color: #6ef5df;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.session button:hover {
+  background: rgba(110, 245, 223, 0.32);
 }
 
 .btn {
@@ -71,6 +76,12 @@ nav a:hover {
   font-weight: 600;
   color: #03131f;
   background: linear-gradient(135deg, #6ef5df, #14a098);
+}
+
+.btn-accent {
+  color: #061a27;
+  background: linear-gradient(135deg, #9ff8ff, #46d3c6);
+  box-shadow: 0 10px 25px rgba(78, 245, 220, 0.25);
 }
 
 .btn-outline {

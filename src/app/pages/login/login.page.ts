@@ -18,6 +18,18 @@ export class LoginPage {
   protected password = '';
   protected feedback = signal<string | null>(null);
   protected session = this.authService.currentSession;
+  protected readonly demoAccounts = [
+    {
+      label: 'Usuario demo',
+      email: 'test@urbanride.com',
+      password: 'test123'
+    },
+    {
+      label: 'Pasajero urbano',
+      email: 'viajero@urbanride.com',
+      password: 'ride2025'
+    }
+  ];
 
   login(): void {
     const session = this.authService.login(this.email, this.password);

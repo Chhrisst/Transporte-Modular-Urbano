@@ -15,8 +15,8 @@ export class AdminLoginPage {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
-  protected email = 'roberto.inche@example.com';
-  protected password = 'movilidad2025';
+  protected email = 'admin@urbanride.com';
+  protected password = 'adminUrbanRide';
   protected feedback = signal<string | null>(null);
 
   login(): void {

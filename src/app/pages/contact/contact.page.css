@@ -1,0 +1,127 @@
+:host {
+  display: block;
+  color: #d7f8ff;
+}
+
+.contact-hero {
+  text-align: center;
+  padding: 4rem 1.5rem 2.5rem;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.contact-hero h1 {
+  font-size: 2.6rem;
+  color: #9ff8ff;
+  margin-bottom: 1rem;
+}
+
+.contact-hero p {
+  max-width: 640px;
+  margin: 0 auto;
+  color: rgba(215, 248, 255, 0.78);
+  line-height: 1.6;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  padding: 2rem 1.5rem 5rem;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+form {
+  background: rgba(7, 40, 58, 0.75);
+  border: 1px solid rgba(79, 244, 219, 0.18);
+  border-radius: 24px;
+  padding: 2.5rem;
+  display: grid;
+  gap: 0.85rem;
+  box-shadow: 0 25px 60px rgba(4, 20, 33, 0.45);
+}
+
+form h2 {
+  margin: 0 0 1rem;
+  color: #6ef5df;
+}
+
+label {
+  font-weight: 600;
+  color: rgba(215, 248, 255, 0.78);
+}
+
+input,
+textarea {
+  background: rgba(4, 18, 29, 0.85);
+  border: 1px solid rgba(79, 244, 219, 0.2);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  color: #e8f4ff;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  margin-top: 0.75rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem;
+  background: linear-gradient(135deg, #6ef5df, #14a098);
+  color: #04202f;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(78, 245, 220, 0.25);
+}
+
+.contact-feedback {
+  color: #9ff8ff;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.contact-details {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.detail-card {
+  background: rgba(4, 20, 33, 0.82);
+  border: 1px solid rgba(79, 244, 219, 0.18);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: 0 18px 45px rgba(4, 20, 33, 0.4);
+}
+
+.detail-card h3 {
+  margin: 0 0 0.5rem;
+  color: #6ef5df;
+}
+
+.detail-card p {
+  margin: 0;
+  font-weight: 600;
+  color: #d7f8ff;
+}
+
+.detail-card span {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgba(215, 248, 255, 0.65);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .contact-content {
+    padding-bottom: 3.5rem;
+  }
+}

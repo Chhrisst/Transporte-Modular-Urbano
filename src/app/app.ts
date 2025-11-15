@@ -10,5 +10,5 @@ import { Header } from './components/header/header';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = 'ModuTransit · Transporte Modular Urbano';
+  protected readonly title = 'UrbanRide · Movilidad Modular Inteligente';
 }

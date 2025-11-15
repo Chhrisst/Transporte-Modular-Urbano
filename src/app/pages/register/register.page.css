@@ -93,6 +93,17 @@ form {
   font-weight: 600;
 }
 
+.register__note {
+  margin-top: 1rem;
+  background: rgba(20, 160, 152, 0.1);
+  border-left: 4px solid #14a098;
+  padding: 0.85rem 1.25rem;
+  border-radius: 12px;
+  color: #1f3e50;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
 .register__feedback {
   margin-top: 1rem;
   color: #0f1e2c;

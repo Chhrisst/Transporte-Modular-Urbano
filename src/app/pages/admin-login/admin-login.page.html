@@ -19,6 +19,13 @@
 
     <p class="admin-login__feedback" *ngIf="feedback() as message">{{ message }}</p>
 
+    <div class="admin-login__credentials">
+      <h2>Credenciales administrativas</h2>
+      <p><strong>Correo:</strong> admin@urbanride.com</p>
+      <p><strong>Contraseña:</strong> adminUrbanRide</p>
+      <span>Utiliza este acceso exclusivo para gestionar rutas, flota y usuarios.</span>
+    </div>
+
     <p class="admin-login__back">
       ¿Eres pasajero? <a routerLink="/ingreso">Inicia sesión aquí</a>
     </p>
